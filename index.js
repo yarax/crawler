@@ -65,11 +65,11 @@ var checkExistence = function (id) {
 var allPages = function (page) {
     if (!page) page = 1;
 
-    var startUrl = 'http://www.immobilienscout24.de/Suche/S-T/P-' + page + '/Wohnung-Miete/Hessen/Frankfurt-am-Main/-/2,00-/-/EURO--670,00?pagerReporting=true';
+    var startUrl = 'http://www.immobilienscout24.de/Suche/S-T/P-' + page + '/Wohnung-Miete/Hessen/Frankfurt-am-Main/-/2,50-/-/EURO--1100,00?pagerReporting=true';
 
     request(startUrl, function (err, res, data) {
         var $ = cheerio.load(data);
-        var links = $('.headline-link');
+        var links = $('.result-list-entry__brand-title-container');
         links.each(function (i, link) {
             var href = link.attribs.href;
             if (href) {
@@ -87,5 +87,5 @@ var allPages = function (page) {
 };
 
 readDB();
-
-setInterval(allPages, 30*60000);
+allPages()
+setInterval(allPages, 3*60000);
