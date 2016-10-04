@@ -50,14 +50,15 @@ var checkExistence = function (id) {
         ids[id] = 1;
         dumpDB();
         console.log("No in list", id);
-        transporter.sendMail(mailOptions, function(error, info){
+/*        transporter.sendMail(mailOptions, function(error, info){
             if(error){
                 return console.log(error);
             } else {
                 console.log('Message sent: ' + info.response);
             }
         });
-
+*/
+	request('http://bot.yarax.ru/immobilen?id=' + id);
     }
 
 };
@@ -74,7 +75,7 @@ var allPages = function (page) {
             var href = link.attribs.href;
             if (href) {
                 var id = href.replace("/expose/", "");
-                console.log('Check id', id);
+                console.log('Check id', id, (new Date()).toISOString());
                 checkExistence(id);
             }
         });
